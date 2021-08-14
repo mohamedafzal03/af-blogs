@@ -1,0 +1,27 @@
+<!-- <label for="title">Title</label>
+<input required value="<%= article.title %>" type="text" name="title" id="title"/>
+<label for="description">Small Desc</label> -->
+<!-- <label for="markdown">Content</label> -->
+
+<div class="input-group" style="min-height: 60px;overflow: scroll">
+    <!-- <input class="border border-white" type="text" class="form-control" placeholder="Title" aria-label="Title" value="<%= article.title %>" type="text" name="title" id="title" required> -->
+    <textarea class="form-control border border-white" placeholder="title" aria-label="With textarea" name="title" id="title" value="<%= article.title %>"><%= article.title %></textarea>
+
+</div>
+<div class="input-group" style="min-height: 60px;overflow: scroll">
+    <textarea class="form-control border border-white" placeholder="description" aria-label="With textarea" name="description" id="description"><%= article.description %></textarea>
+</div>
+<div class="input-group " style="min-height: 300px;overflow: scroll">
+    <textarea class="form-control border border-white" placeholder="write your Content here .." aria-label="With textarea" name="markdown" id="markdown" ><%= article.markdown %></textarea>
+</div>
+
+<!-- <button type="submit">save</button> -->
+<a href="/articles">
+    <button type="button" class="btn btn-outline-dark">cancel</button>
+    <!-- <button type="button" class="btn btn-secondary">cancel</button> -->
+</a>
+<button type="submit" class="btn btn-outline-dark">Save</button>
+
+<!-- <button type="submit" class="btn btn-primary" style='background-color:#dcc7eb;border-color: #dcc7eb'>Save</button> -->
+
+
