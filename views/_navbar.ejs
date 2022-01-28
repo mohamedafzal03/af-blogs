@@ -11,7 +11,58 @@
         color: white;
         border-radius: 20px;
     }
+    #success{
+    background:#03a679;
+    color:#f0f0f0;  
+    }
+
+    #failure{
+    background:#ff3939;
+    color:#f0f0f0;  
+    }
+
+    .notify{  
+    /* position:absolute; */
+    top:0px;
+    width:100%;
+    height:0;  
+    box-sizing:border-box;
+    color:white;  
+    text-align:center;
+    background:rgba(0,0,0,.6);
+    overflow:hidden;
+    box-sizing:border-box;
+    transition:height .5s;
+    }
+
+    #notifyType:before{
+    display:block;
+    margin-top:15px; 
+    
+    }
+
+    .activeBanner{  
+    height:50px;
+    }
+
+    .success:before{
+    Content:"Aww Yeaaaaa! Success!";
+    }
+
+    .login:before{
+    Content:"please login !";
+    }
+    .like-it:before{
+    Content:"please login to like !";
+    }
+    .create-blog:before{
+    Content:"please login to create your own blogs !";
+    }
+    .create-short:before{
+    Content:"please login to create your own shorts !";
+    }
 </style>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="color: white;position: sticky;top:0;z-index:1000">
     <div class="container-fluid" style="font-size: 18px;">
         <a class="navbar-brand heading" style="color: white;" href="/">
@@ -29,6 +80,10 @@
                 <li class="nav-item">
                     <a class="nav-link <%= newblogs %>" href="/articles/new">create Blog</a>
                 </li>
+            <%}else{%>
+                <li class="nav-item" onclick="popUpMsg('create-blog')">
+                    <span class="nav-link">create Blog</span>
+                </li>
             <%}%>
             <li class="nav-item">
                 <a class="nav-link <%= shortstab %>" href="/shorts">Shorts</a>
@@ -36,6 +91,10 @@
             <%if (userName != "guest" ) {%> 
                 <li class="nav-item">
                     <a class="nav-link <%= newshorts %>" href="/shorts/new">create shorts</a>
+                </li>
+            <%}else{%>
+                <li class="nav-item">
+                    <span class="nav-link" onclick="popUpMsg('create-short')">create shorts</span>
                 </li>
             <%}%>
         </ul>
@@ -61,3 +120,19 @@
         </div>
     </div>
 </nav>
+<div class="notify">
+    <span id="notifyType" class="">
+    </span>
+</div>
+<script>
+    function popUpMsg(type){
+        var notify = document.querySelector(".notify");
+        notify.classList.add("activeBanner");
+        var notifyType = document.querySelector("#notifyType");
+        notifyType.setAttribute("class",type);
+        setTimeout(function(){
+            notify.classList.remove("activeBanner");
+            notifyType.setAttribute("class","");
+        },2000)
+    }
+</script>

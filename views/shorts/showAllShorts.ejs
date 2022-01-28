@@ -29,7 +29,7 @@
                           <button type="button" class="btn btn-outline-dark">read more</button>
                         </a>
                       </div>
-                      <!-- <%if (userName != "guest" && short.ownerMail == userMail) {%>  -->
+                      <%if (userName != "guest" && short.ownerMail == userMail) {%> 
                       <div class="col-2" style="position:relative">
                         <a href="/shorts/edit/<%=short.id%>" >
                           <svg class="svg" xmlns="http://www.w3.org/2000/svg"  style="width: 3vh;height: 3vh;color: black;position:relative;left:7vh" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -46,10 +46,10 @@
                           </span>
                         </form>
                       </div>
-                      <!-- <%}else{%> -->
+                      <%}else{%>
                         <div class="col-2"></div>
                         <div class="col-2"></div>
-                      <!-- <%}%> -->
+                      <%}%>
                       <div class="col-2">
                         <span onclick="like(this,'shorts')" id="<%=short.id%>">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill zoominsvg" style="width: 2.5vh;height: 2.5vh;" viewBox="0 0 16 16">

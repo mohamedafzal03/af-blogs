@@ -3,6 +3,11 @@
     node.parentNode.submit();
   }
   function like(node,type){
+    var userName = "<%- userName %>";
+    if(userName == "guest"){
+      popUpMsg("like-it");
+      return;
+    }
     var like = node.querySelector("path").getAttribute("class");
     if(like == "white"){
       var xhr = new XMLHttpRequest();
