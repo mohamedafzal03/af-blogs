@@ -1,0 +1,24 @@
+<%
+checkLikedStatus = function(owner,id,type) {
+    var flag = false;
+    if(type == 'articles' && owner && owner.likedArticlesId && owner.likedArticlesId.length){
+        owner.likedArticlesId.forEach(function(item){
+            if(item._id == id){
+                flag = true;
+                return;
+            }
+        })
+    }else if(type == 'shorts' && owner && owner.likedShortsId && owner.likedShortsId.length){
+        owner.likedShortsId.forEach(function(item){
+            if(item._id == id){
+                flag = true;
+                return;
+            }
+        })
+    }
+    if(flag){
+        return true
+    }
+    return false;
+}
+%>

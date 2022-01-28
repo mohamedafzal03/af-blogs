@@ -1,0 +1,33 @@
+<script>
+  function submit1(node){
+    node.parentNode.submit();
+  }
+  function like(node,type){
+    var like = node.querySelector("path").getAttribute("class");
+    if(like == "white"){
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:3000/'+type+'/'+node.id+"$like", true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      node.querySelector("path").setAttribute("class","animated-background");
+      xhr.onload = function () {
+        var response = JSON.parse(this.responseText);
+        node.querySelector("path").setAttribute("class","red");
+        node.parentElement.querySelector("#likedCount").innerHTML = response.likedCount;
+        console.log(this.responseText);
+      };
+      xhr.send();
+    }else if(like == "red"){
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:3000/'+type+'/'+node.id+"$unlike", true);
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      node.querySelector("path").setAttribute("class","animated-background");
+      xhr.onload = function () {
+        var response = JSON.parse(this.responseText);
+        node.querySelector("path").setAttribute("class","white");
+        node.parentElement.querySelector("#likedCount").innerHTML = response.likedCount;
+        console.log(this.responseText);
+      };
+      xhr.send();
+    }
+  }
+</script>

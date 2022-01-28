@@ -1,0 +1,92 @@
+<style>
+ .icon {
+    fill: red; 
+ }
+ .icon-secondary {
+   fill: orange;
+ }
+ .red{
+   color:red
+ }
+ .white{
+   color:#cbc7c7
+ }
+ .zoominsvg:hover {
+   width: 10vh;
+   height: 10vh;
+   transform: scale(1.5);
+ }
+ .zoominsvg{
+   transition: transform .2s;
+ }
+ @keyframes placeHolderShimmer {
+   0% {
+     color: #cbc7c7;
+   }
+   25% {
+     color:white;
+   }
+   50% {
+     color: #cbc7c7;
+   }
+   75% {
+     color:white;
+   }
+   100% {
+     color: #cbc7c7;
+   }
+ }
+ 
+ .animated-background {
+   animation-duration: 2s;
+   color:#cbc7c7;
+   animation-fill-mode: forwards;
+   animation-iteration-count: infinite;
+   animation-name: placeHolderShimmer;
+   animation-timing-function: linear;
+   position: relative;
+ }
+
+.freeze{
+	opacity:0.6;
+}
+.dontShow{
+  display: none;
+}
+.loader {
+  position: absolute;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 50%;
+  bottom: 50%;
+  z-index: 100;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.svg:hover {
+  fill: #6fb4cc;
+  width: 10vh;
+  height: 10vh;
+  transform: scale(1.5);
+}
+.svg{
+  transition: transform .2s;
+}
+</style>

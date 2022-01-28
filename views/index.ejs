@@ -4,11 +4,148 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Blog</title>
+  <title>My Logger</title>
+  <%- include('commonjs') %>
+  <%- include('viewCommonCss') %>
+  <% include('functions') %>
+<style>
+  @media (max-width: 800px) {
+    .leftSide{
+      top:10vh;height: 100vh;
+    }
+  }
+  @media (min-width: 800px) {
+    .leftSide{
+      top:20vh;height: 80vh;
+    }
+  }
+  .shorts-container{
+      padding: 20px 45px 10px 0px;
+      white-space:nowrap;
+      overflow-x:auto;
+  }
+  .box{
+      margin:10px;
+      display:inline-block
+  }
+</style>
 </head>
-<body>
-  <h1>HI this is haha afzal profile</h1>
-  <a href="/articles">blogs</a>
-  <a href="/shorts">shorts</a>
+<body style="background-color:#edf6f9">
+  <%- include('_navbar') %>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12 leftSide" style="position: sticky;">
+        <h1 style="font-size: 5rem;">Better blog for Yourself.</h1>
+        <h1>
+          <button type="button" class="btn btn-outline-dark" style="border-radius: 5vh">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+              </svg>
+            checkit out
+          </button>
+        </h1>
+        <div class="shorts-container">
+          <% shorts.forEach(short => { %>
+            <div class="col-lg-6 col-sm-12 box">
+            <div class="card" style="box-shadow:0 0px 5px 0 #fffefe, 0 0px 15px 0 #dce2dc;">
+                <div class="card-body">
+                    <h5 class="card-title"><%= short.title %></h5>
+                    <p class="card-text"><%= '' + short.description.substring(1,10) + ' ...' %></p>
+                    <div class="row">
+                      <div class="col-6">
+                        <a href="">
+                          <button type="button" class="btn btn-outline-dark">read more</button>
+                        </a>
+                      </div>
+                      <div class="col-1" style="position:relative">
+                      </div>
+                      <div class="col-1" style="position:relative">
+                      </div>
+                      <div class="col-1" style="position:relative">
+                      </div>
+                      <div class="col-2">
+                        <span onclick="like(this,'shorts')" id="<%=short.id%>">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill zoominsvg" style="width: 2.5vh;height: 2.5vh;" viewBox="0 0 16 16">
+                            <path id="hot" class="<%= checkLikedStatus(owner,short.id,'shorts') ? 'red' : 'white' %>" fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                          </svg>
+                          <span id="likedCount">
+                            <%= short.likedCount %>
+                          </span>
+                        </span>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          <%})%>
+          <div class="col-lg-2 col-sm-12 box">
+            <div style="position: relative;top: 2.5rem;">
+              <a href="/shorts">
+                <button type="button" class="btn" style="background-color: black;color: white;">Load More</button>
+              </a>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="col-lg-6 col-sm-12" style="padding: 20px 0px 0px 0px;">
+        <div class="row">
+          <% articles.forEach(article => { %>
+            <div id="allArticles" class="card mb-3" style="max-width: 840px; box-shadow:0 0px 5px 0 #fffefe, 0 0px 15px 0 #dce2dc;">
+                <div class="row g-0">
+                    <div class="col-md-3">
+                        <img src="https://images.unsplash.com/photo-1586672806791-3a67d24186c0?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y292ZXIlMjBhcnR8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" class="card-img-top" alt="...">
+                      </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <h5 class="card-title"><%= article.title %></h5>
+                        <p class="card-text"><%= '' + article.description.substring(1,70) + ' ...' %></p>
+                        <div class="row g-0">
+                          <div class="col-8">
+                            <a href="/articles/<%=article.slug%>">
+                              <button type="button" class="btn btn-outline-dark">read more</button>
+                            </a>
+                          </div>
+                          <%if (userName != "guest" && article.ownerMail == userMail) {%> 
+                          <div class="col-1">
+                          </div>
+                          <div class="col-1">
+                          </div>
+                          <%}%>
+                          <div class="col-2">
+                            <span onclick="like(this,'articles')" id="<%=article.id%>">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill zoominsvg" style="width: 2.5vh;height: 2.5vh;" viewBox="0 0 16 16">
+                                <path id="hot" class="<%= checkLikedStatus(owner,article.id,'articles') ? 'red' : 'white' %>" fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                              </svg>
+                            </span>
+                            <span id="likedCount">
+                              <%= article.likedCount %>
+                            </span>
+                        </div>
+                        </div>
+                        <p class="card-text">
+                          <small class="text-muted"><%= article.date %></small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          <%})%>
+          <div class="row">
+            <div class="col-lg-4 col-sm-4">
+            </div>
+            <div class="col-lg-4 col-sm-4">
+              <a href="/articles" style="position: relative;left: 35%;">
+              <button type="button" class="btn" style="background-color: black;color: white;">Load More</button>
+              </a>
+            </div>
+            <div class="col-lg-4 col-sm-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
 </body>
 </html>
+<%- include('_footer') %>

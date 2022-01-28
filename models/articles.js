@@ -15,12 +15,12 @@ const articleSchema = new mongoose.Schema({
       type: String
     },
     markdown: {
-    type: String,
-    required: true
+      type: String,
+      required: true
     }
     ,sanitizedHtml: {
-    type: String,
-    required: true
+      type: String,
+      required: true
     },
     createdAt: {
       type: Date,
@@ -29,9 +29,16 @@ const articleSchema = new mongoose.Schema({
     slug: {
       type: String,
       required : true,
-    unique : true,
-
-    }
+      unique : true,
+    },
+    ownerMail : {
+      type: String,
+      required : true    
+    },
+    likedCount : {
+      type: Number,
+      default: 0,
+    },
   })
   articleSchema.pre('validate',function(next){
       this.slug = slugify(this.title,{

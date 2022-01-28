@@ -1,12 +1,18 @@
-
-<div class="input-group" style="min-height: 60px;overflow: scroll">
-    <textarea class="form-control border border-white" placeholder="title" aria-label="With textarea" name="title" id="title" value="<%= shorts.title %>"><%= shorts.title %></textarea>
-
+<style>
+    .field{
+      padding:1rem 0rem 0rem 0rem;
+    }
+</style>
+<div class="input-group field">
+    <input class="form-control form-control-lg border border-white" type="text" placeholder="Title" name="title" id="title" value="<%= shorts.title %>">
 </div>
-<div class="input-group" style="min-height: 60px;overflow: scroll">
-    <textarea class="form-control border border-white" placeholder="description" aria-label="With textarea" name="description" id="description"><%= shorts.description %></textarea>
+<div class="input-group field">
+    <textarea class="form-control form-control-lg border border-white" placeholder="enter your thoughts" aria-label="With textarea" name="description" id="description"><%= shorts.description %></textarea>
 </div>
-<a href="/shorts">
-    <button type="button" class="btn btn-outline-dark">cancel</button>
-</a>
-<button type="submit" class="btn btn-outline-dark">Save</button>
+<br>
+<div style="padding: 1rem 0rem 0.5rem 0rem;">
+    <a href="/shorts" style="color: #ffffffff;">
+        <button type="button" class="btn btn-outline-dark">cancel</button>
+    </a>
+    <button type="submit" class="btn btn-outline-dark">Save</button>
+</div>

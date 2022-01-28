@@ -9,7 +9,5 @@ mongoose.connect(cloudDbPath, {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'haha connection error:'));
 db.once('open', function() {
-  // we're connected!
   console.log('mongo db connected')
 });
-// exports.db = db;

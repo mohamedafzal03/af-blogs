@@ -1,0 +1,70 @@
+<style>
+  .articlesHeader{
+    max-width: 840px;
+    box-shadow:0 0px 5px 0 #fffefe, 0 0px 15px 0 #dce2dc;
+    border-radius: 50px;
+    background-color: white;
+    margin: 1rem 0rem 1rem 0rem;
+  }
+  .tabClass {
+    border-color: black;
+    border-radius: 40px;
+    padding: 0.5rem 1rem;
+    color: #0d6efd;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+  }
+  @media only screen and (min-width: 415px) {
+    .search-media{
+      width:33%
+    }
+  }
+  @media only screen and (max-width: 414px) and (min-width:396px) {
+    .search-media{
+      width:30%
+    }
+  }
+  @media only screen and (max-width: 395px) and (min-width:300px) {
+    .search-media{
+      width:25%
+    }
+  }
+</style>
+<script>
+  function sort(sortType,dataType){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:3000/'+dataType+'/'+'sort/'+sortType+"$"+dataType, true);
+    xhr.setRequestHeader('Content-type', 'text/html');
+    document.body.setAttribute("class","freeze");
+    document.querySelector(".loader").classList.remove("dontShow")
+    xhr.onload = function () {
+      console.log("response came",this.responseText);
+      console.log("before write");
+      document.head.innerHTML = "";
+      document.body.setAttribute("class","");
+      document.body.innerHTML = this.responseText;
+      console.log("åfter write");
+      window.haha=this.responseText;
+    };
+    xhr.send();
+  }
+</script>
+<ul class="nav nav-pills mb-3 articlesHeader">
+  <li class="nav-item">
+    <button onclick="sort('recent','<%= type%>')"type="button" class="btn btn-outline-dark <%= recent %>" style="border-radius: 5vh;margin: 1vh" type="button">
+      Recent
+    </button>
+  </li>
+  <li class="nav-item">
+    <button onclick="sort('mostLiked','<%= type%>')" type="button" class="btn btn-outline-dark <%= mostLiked %>" style="border-radius: 5vh;margin: 1vh">
+      Most Liked
+    </button>
+  </li>
+  <li class="nav-item search-media" style="margin: 1vh 0vh 1vh 0vh; margin-left: auto;">
+    <input type="text" aria-label="First name" class="form-control" placeholder="search">
+  </li>
+  <li class="nav-item" style="width: 3vh;height: 3vh;margin: 1.5vh 1vh 1vh 1vh">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+    </svg>
+  </li>
+</ul>

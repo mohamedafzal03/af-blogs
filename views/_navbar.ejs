@@ -1,10 +1,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
+    a.active{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .heading{
+        padding: 10px;
+        background-color: black;
+        color: white;
+        border-radius: 20px;
+    }
+</style>
 <nav class="navbar navbar-expand-lg navbar-light bg-light" style="color: white;position: sticky;top:0;z-index:1000">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-            Afzal BLogs
+    <div class="container-fluid" style="font-size: 18px;">
+        <a class="navbar-brand heading" style="color: white;" href="/">
+            My Logger
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#hahaNav" aria-controls="hahaNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -14,19 +25,39 @@
             <li class="nav-item">
                 <a class="nav-link <%= blogs %>" href="/articles">Blogs</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link <%= newblogs %>" href="/articles/new">create Blog</a>
-            </li>
+            <%if (userName != "guest" ) {%> 
+                <li class="nav-item">
+                    <a class="nav-link <%= newblogs %>" href="/articles/new">create Blog</a>
+                </li>
+            <%}%>
             <li class="nav-item">
                 <a class="nav-link <%= shortstab %>" href="/shorts">Shorts</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link <%= newshorts %>" href="/shorts/new">create shorts</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-            </li>
+            <%if (userName != "guest" ) {%> 
+                <li class="nav-item">
+                    <a class="nav-link <%= newshorts %>" href="/shorts/new">create shorts</a>
+                </li>
+            <%}%>
         </ul>
+        <div class="nav-item dropdown" style="margin-left: auto;">
+            <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src=" <%=userPicture %>" class="avatar" alt="Avatar" width=40 height=40 style="border-radius: 20px;">
+                <%= userName %>
+                  <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu collapse" aria-labelledby="navbarDropdown" id="navbarDropdown">
+                <%if (userName == "guest" ) {%> 
+                    <li><a href="/about" class="dropdown-item"> About</a></li>
+                    <li><a href="/settings" class="dropdown-item">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a href="/login" class="dropdown-item">Login</a></li>
+                <%}else{%>
+                    <li><a href="/profile" class="dropdown-item">Profile</a></li>
+                    <li><a href="/settings" class="dropdown-item"> Settings</a></li>
+                    <li><a href="/logout" class="dropdown-item"> Logout</a></li>
+                 <%}%>
+            </ul>
+        </div>   
         </div>
     </div>
-</nav> 
+</nav>
